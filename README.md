@@ -1,0 +1,1 @@
+This is demo project to test YARG email template component
