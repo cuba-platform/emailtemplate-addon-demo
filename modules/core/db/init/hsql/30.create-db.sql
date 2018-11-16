@@ -52,8 +52,8 @@ values ('4847ec8d-f990-1ccb-634b-0e7e1513493d', 1, '2018-11-15 15:59:42', 'admin
 
 
 insert into EMAILTEMPLATES_EMAIL_TEMPLATE
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, GROUP_ID, DTYPE, CODE, FROM_, TO_, CC, BCC, SUBJECT, USE_REPORT_SUBJECT, EMAIL_BODY_REPORT_ID)
-values ('1b6b7378-b46c-0ebe-b1fa-7fc7b3d823e5', 1, '2018-11-15 16:00:42', 'admin', '2018-11-15 16:00:42', null, null, null, 'Subscription created', null, 'emailtemplates$ReportEmailTemplate', '1', null, null, null, null, null, null, null);
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, GROUP_ID, DTYPE, TYPE, CODE, FROM_, TO_, CC, BCC, SUBJECT, USE_REPORT_SUBJECT, EMAIL_BODY_REPORT_ID)
+values ('1b6b7378-b46c-0ebe-b1fa-7fc7b3d823e5', 1, '2018-11-15 16:00:42', 'admin', '2018-11-15 16:00:42', null, null, null, 'Subscription created', null, 'emailtemplates$ReportEmailTemplate', 'report', '1', null, null, null, null, null, null, null);
 
 insert into EMAILTEMPLATES_TEMPLATE_REPORT
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, REPORT_ID, EMAIL_TEMPLATE_ID)
@@ -73,8 +73,8 @@ values ('e54c6bcf-a800-d24e-6944-4d573e8734cc', 1, '2018-11-15 16:00:42', 'admin
 
 
 insert into EMAILTEMPLATES_EMAIL_TEMPLATE
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, GROUP_ID, DTYPE, CODE, FROM_, TO_, CC, BCC, SUBJECT, USE_REPORT_SUBJECT, EMAIL_BODY_REPORT_ID)
-values ('439d7ea3-16ce-269d-d125-42a6617e764b', 1, '2018-11-16 11:11:13', 'admin', '2018-11-16 11:11:13', null, null, null, 'Subscription updated', null, 'emailtemplates$ReportEmailTemplate', '2', null, null, null, null, null, null, null);
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, GROUP_ID, DTYPE, TYPE, CODE, FROM_, TO_, CC, BCC, SUBJECT, USE_REPORT_SUBJECT, EMAIL_BODY_REPORT_ID)
+values ('439d7ea3-16ce-269d-d125-42a6617e764b', 1, '2018-11-16 11:11:13', 'admin', '2018-11-16 11:11:13', null, null, null, 'Subscription updated', null, 'emailtemplates$ReportEmailTemplate', 'report', '2', null, null, null, null, null, null, null);
 
 insert into EMAILTEMPLATES_TEMPLATE_REPORT
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, REPORT_ID, EMAIL_TEMPLATE_ID)
