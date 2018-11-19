@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.haulmont.demo.emailtemplates.entity.Customer"
+          extends="_local"
+          name="customer-view">
+        <property name="subscription"
+                  view="_minimal"/>
+    </view>
+    <view class="com.haulmont.demo.emailtemplates.entity.Subscription"
+          extends="_local"
+          name="subscription-view">
+        <property name="customer"
+                  view="_minimal"/>
+    </view>
+</views>

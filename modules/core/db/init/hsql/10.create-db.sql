@@ -1,5 +1,5 @@
 -- begin DEMO_CUSTOMER
-create table DEMO_CUSTOMER (
+create table YETDEMO_CUSTOMER (
     ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -17,7 +17,7 @@ create table DEMO_CUSTOMER (
 )^
 -- end DEMO_CUSTOMER
 -- begin DEMO_SUBSCRIPTION
-create table DEMO_SUBSCRIPTION (
+create table YETDEMO_SUBSCRIPTION (
     ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,

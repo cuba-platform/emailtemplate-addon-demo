@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.haulmont.demo.emailtemplates.web.subscription.SubscriptionEdit"
+        datasource="subscriptionDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.demo.emailtemplates.web.subscription">
+    <dsContext>
+        <datasource id="subscriptionDs"
+                    class="com.haulmont.demo.emailtemplates.entity.Subscription"
+                    view="subscription-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="subscriptionDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="active"/>
+                <field property="expiryDate"/>
+                <field editable="false"
+                       property="customer"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

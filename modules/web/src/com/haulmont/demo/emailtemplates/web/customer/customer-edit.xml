@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.haulmont.demo.emailtemplates.web.customer.CustomerEdit"
+        datasource="customerDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.demo.emailtemplates.web.customer">
+    <dsContext>
+        <datasource id="customerDs"
+                    class="com.haulmont.demo.emailtemplates.entity.Customer"
+                    view="customer-view">
+            <collectionDatasource id="subscriptionDs"
+                                  property="subscription"/>
+        </datasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="customerDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="surname"/>
+                <field property="email"/>
+            </column>
+        </fieldGroup>
+        <groupBox id="subscriptionBox"
+                  caption="msg://com.haulmont.demo.emailtemplates.entity/Customer.subscription">
+            <table id="subscriptionTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                    <column id="active"/>
+                    <column id="expiryDate"/>
+                </columns>
+                <rows datasource="subscriptionDs"/>
+                <buttonsPanel>
+                    <button action="subscriptionTable.create"/>
+                    <button action="subscriptionTable.edit"/>
+                    <button action="subscriptionTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>
