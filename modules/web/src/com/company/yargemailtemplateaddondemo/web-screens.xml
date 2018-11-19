@@ -8,4 +8,6 @@
             template="com/company/yargemailtemplateaddondemo/web/subscription/subscription-edit.xml"/>
     <screen id="demo$Subscription.browse"
             template="com/company/yargemailtemplateaddondemo/web/subscription/subscription-browse.xml"/>
+    <screen id="sendNotificationScreen"
+            template="com/company/yargemailtemplateaddondemo/web/subscription/send-notification-screen.xml"/>
 </screen-config>

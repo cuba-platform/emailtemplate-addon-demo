@@ -20,24 +20,23 @@ import javax.inject.Inject;
 @Component("demo_SubscriptionListener")
 public class SubscriptionListener implements BeforeInsertEntityListener<Subscription>, BeforeUpdateEntityListener<Subscription> {
 
-    public static final String CREATED_TEMPLATE_CODE = "1";
-    public static final String UPDATED_TEMPLATE_CODE = "2";
+    public static final String CREATED_TEMPLATE_CODE = "subscription_created";
+    public static final String UPDATED_TEMPLATE_CODE = "subscription_updated";
+    public static final String ENDED_TEMPLATE_CODE = "subscription_ended";
+    public static final String RENEWED_TEMPLATE_CODE = "subscription_renewed";
 
     private static final Logger LOG = LoggerFactory.getLogger(SubscriptionListener.class);
 
     @Inject
     EmailTemplatesAPI emailTemplatesAPI;
     @Inject
-    private Messages messages;
-    @Inject
     PersistenceTools persistenceTools;
 
     @Override
     public void onBeforeInsert(Subscription entity, EntityManager entityManager) {
          try {
-            EmailTemplateBuilder builder = emailTemplatesAPI.buildFromTemplate(CREATED_TEMPLATE_CODE);
-            builder.setTo(entity.getCustomer().getEmail())
-                    .setSubject(messages.getMessage(SubscriptionListener.class, "createdSubscription"))
+            emailTemplatesAPI.buildFromTemplate(CREATED_TEMPLATE_CODE)
+                    .setTo(entity.getCustomer().getEmail())
                     .sendEmail();
         } catch (TemplateNotFoundException | EmailException | ReportParameterTypeChangedException e) {
             LOG.warn(e.getMessage());
@@ -47,23 +46,22 @@ public class SubscriptionListener implements BeforeInsertEntityListener<Subscrip
     @Override
     public void onBeforeUpdate(Subscription entity, EntityManager entityManager) {
         try {
-            EmailTemplateBuilder builder = emailTemplatesAPI.buildFromTemplate(UPDATED_TEMPLATE_CODE)
-                    .setTo(entity.getCustomer().getEmail());
-            sendEmail(builder, "updatedSubscription");
+            emailTemplatesAPI.buildFromTemplate(UPDATED_TEMPLATE_CODE)
+                    .setTo(entity.getCustomer().getEmail())
+                    .sendEmail();
             if (persistenceTools.isDirty(entity, "active")) {
                 if (Boolean.TRUE.equals(entity.getActive())) {
-                    sendEmail(builder, "renewedSubscription");
+                    emailTemplatesAPI.buildFromTemplate(RENEWED_TEMPLATE_CODE)
+                            .setTo(entity.getCustomer().getEmail())
+                            .sendEmail();
                 } else {
-                    sendEmail(builder, "endedSubscription");
+                    emailTemplatesAPI.buildFromTemplate(ENDED_TEMPLATE_CODE)
+                            .setTo(entity.getCustomer().getEmail())
+                            .sendEmail();
                 }
             }
         } catch (TemplateNotFoundException | EmailException | ReportParameterTypeChangedException e) {
             LOG.warn(e.getMessage());
         }
-    }
-
-    private void sendEmail(EmailTemplateBuilder builder, String message) throws TemplateNotFoundException, ReportParameterTypeChangedException, EmailException {
-        builder.setSubject(messages.getMessage(SubscriptionListener.class, message))
-                .sendEmail();
     }
 }

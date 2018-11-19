@@ -13,13 +13,6 @@
                 <![CDATA[select e from demo$Subscription e]]>
             </query>
         </groupDatasource>
-        <collectionDatasource id="emailTemplatesDs"
-                              class="com.haulmont.addon.emailtemplates.entity.EmailTemplate"
-                              view="emailTemplate-view">
-            <query>
-                <![CDATA[select e from emailtemplates$EmailTemplate e]]>
-            </query>
-        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
@@ -30,14 +23,6 @@
                 datasource="subscriptionsDs">
             <properties include=".*"/>
         </filter>
-        <hbox spacing="true">
-            <lookupField id="templatesField"
-                         optionsDatasource="emailTemplatesDs"
-                         width="250px"/>
-            <button id="sendButton"
-                    caption="msg://send"
-                    invoke="onSendButtonClick"/>
-        </hbox>
         <groupTable id="subscriptionsTable"
                     width="100%">
             <actions>
@@ -59,6 +44,9 @@
                         action="subscriptionsTable.edit"/>
                 <button id="removeBtn"
                         action="subscriptionsTable.remove"/>
+                <button id="sendNotificationButton"
+                        caption="msg://send_notification"
+                        invoke="onSendNotificationButtonClick"/>
             </buttonsPanel>
         </groupTable>
     </layout>
