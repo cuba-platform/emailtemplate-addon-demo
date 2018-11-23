@@ -12,6 +12,8 @@ import com.haulmont.cuba.core.listener.BeforeUpdateEntityListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -34,17 +36,22 @@ public class SubscriptionListener implements BeforeInsertEntityListener<Subscrip
 
     @Override
     public void onBeforeInsert(Subscription entity, EntityManager entityManager) {
-        Map<String, Object> entityParams = new HashMap<>();
-        entityParams.put("subscription", entity);
-        entityParams.put("customer", entity.getCustomer());
-        try {
-            emailTemplatesAPI.buildFromTemplate(CREATED_TEMPLATE_CODE)
-                    .setTo(entity.getCustomer().getEmail())
-                    .setBodyParameters(entityParams)
-                    .sendEmail();
-        } catch (TemplateNotFoundException | EmailException | ReportParameterTypeChangedException e) {
-            LOG.warn(e.getMessage());
-        }
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+            @Override
+            public void afterCommit() {
+                Map<String, Object> entityParams = new HashMap<>();
+                entityParams.put("subscription", entity);
+                entityParams.put("customer", entity.getCustomer());
+                try {
+                    emailTemplatesAPI.buildFromTemplate(CREATED_TEMPLATE_CODE)
+                            .setTo(entity.getCustomer().getEmail())
+                            .setBodyParameters(entityParams)
+                            .sendEmail();
+                } catch (TemplateNotFoundException | EmailException | ReportParameterTypeChangedException e) {
+                    LOG.warn(e.getMessage());
+                }
+            }
+        });
     }
 
     @Override
