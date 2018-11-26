@@ -28,8 +28,9 @@ public class Subscription extends StandardEntity {
     @Column(name = "EXPIRY_DATE")
     protected Date expiryDate;
 
+    @NotNull
     @OnDeleteInverse(DeletePolicy.UNLINK)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CUSTOMER_ID")
     protected Customer customer;
 

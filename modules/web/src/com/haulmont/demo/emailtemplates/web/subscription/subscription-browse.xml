@@ -40,6 +40,8 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
+                <button id="createButton"
+                        action="subscriptionsTable.create"/>
                 <button id="editBtn"
                         action="subscriptionsTable.edit"/>
                 <button id="removeBtn"

@@ -1,4 +1,4 @@
--- begin DEMO_CUSTOMER
+-- begin YETDEMO_CUSTOMER
 create table YETDEMO_CUSTOMER (
     ID varchar(36) not null,
     VERSION integer not null,
@@ -15,8 +15,8 @@ create table YETDEMO_CUSTOMER (
     --
     primary key (ID)
 )^
--- end DEMO_CUSTOMER
--- begin DEMO_SUBSCRIPTION
+-- end YETDEMO_CUSTOMER
+-- begin YETDEMO_SUBSCRIPTION
 create table YETDEMO_SUBSCRIPTION (
     ID varchar(36) not null,
     VERSION integer not null,
@@ -30,8 +30,8 @@ create table YETDEMO_SUBSCRIPTION (
     NAME varchar(255),
     ACTIVE boolean not null,
     EXPIRY_DATE date,
-    CUSTOMER_ID varchar(36),
+    CUSTOMER_ID varchar(36) not null,
     --
     primary key (ID)
 )^
--- end DEMO_SUBSCRIPTION
+-- end YETDEMO_SUBSCRIPTION

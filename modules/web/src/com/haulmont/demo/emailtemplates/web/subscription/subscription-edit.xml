@@ -20,8 +20,7 @@
                 <field property="name"/>
                 <field property="active"/>
                 <field property="expiryDate"/>
-                <field editable="false"
-                       property="customer"/>
+                <field property="customer"/>
             </column>
         </fieldGroup>
         <frame id="windowActions"
