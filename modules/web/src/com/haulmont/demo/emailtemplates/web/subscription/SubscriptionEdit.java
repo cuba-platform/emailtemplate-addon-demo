@@ -9,7 +9,6 @@ import com.haulmont.demo.emailtemplates.entity.Subscription;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SubscriptionEdit extends AbstractEditor<Subscription> {
 
@@ -18,11 +17,6 @@ public class SubscriptionEdit extends AbstractEditor<Subscription> {
 
     protected List<Customer> entitiesToUpdate = new ArrayList<>();
 
-    @Override
-    public void init(Map<String, Object> params) {
-        super.init(params);
-        customerField.addLookupAction();
-    }
 
     @Override
     protected void postInit() {
@@ -34,6 +28,7 @@ public class SubscriptionEdit extends AbstractEditor<Subscription> {
                 Customer customer = (Customer) v.getValue();
                 customer = getDsContext().getDataSupplier().reload(customer, "customer-view");
                 Customer currentCustomer = getItem().getCustomer();
+                currentCustomer = getDsContext().getDataSupplier().reload(currentCustomer, "customer-view");
                 Subscription subscription = customer.getSubscription().stream()
                         .filter(s -> s.equals(getItem()))
                         .findFirst()
