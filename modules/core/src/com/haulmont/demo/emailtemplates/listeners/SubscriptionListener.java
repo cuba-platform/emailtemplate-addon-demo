@@ -39,13 +39,9 @@ public class SubscriptionListener implements BeforeInsertEntityListener<Subscrip
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
             @Override
             public void afterCommit() {
-                Map<String, Object> entityParams = new HashMap<>();
-                entityParams.put("subscription", entity);
-                entityParams.put("customer", entity.getCustomer());
                 try {
                     emailTemplatesAPI.buildFromTemplate(CREATED_TEMPLATE_CODE)
                             .setTo(entity.getCustomer().getEmail())
-                            .setBodyParameters(entityParams)
                             .sendEmail();
                 } catch (TemplateNotFoundException | EmailException | ReportParameterTypeChangedException e) {
                     LOG.warn(e.getMessage());
@@ -56,27 +52,18 @@ public class SubscriptionListener implements BeforeInsertEntityListener<Subscrip
 
     @Override
     public void onBeforeUpdate(Subscription entity, EntityManager entityManager) {
-        Map<String, Object> entityParams = new HashMap<>();
-        entityParams.put("subscription", entity);
-        entityParams.put("customer", entity.getCustomer());
         try {
             emailTemplatesAPI.buildFromTemplate(UPDATED_TEMPLATE_CODE)
                     .setTo(entity.getCustomer().getEmail())
-                    .setBodyParameters(entityParams)
                     .sendEmail();
             if (persistenceTools.isDirty(entity, "active")) {
-                Map<String, Object> stringParams = new HashMap<>();
-                stringParams.put("subscription", entity.getName());
-                stringParams.put("customer", entity.getCustomer().getName());
                 if (Boolean.TRUE.equals(entity.getActive())) {
                     emailTemplatesAPI.buildFromTemplate(RENEWED_TEMPLATE_CODE)
                             .setTo(entity.getCustomer().getEmail())
-                            .setBodyParameters(stringParams)
                             .sendEmail();
                 } else {
                     emailTemplatesAPI.buildFromTemplate(ENDED_TEMPLATE_CODE)
                             .setTo(entity.getCustomer().getEmail())
-                            .setBodyParameters(stringParams)
                             .sendEmail();
                 }
             }
