@@ -24,8 +24,9 @@ public class Subscription extends StandardEntity {
     @Column(name = "ACTIVE", nullable = false)
     protected Boolean active = false;
 
+    @NotNull
     @Temporal(TemporalType.DATE)
-    @Column(name = "EXPIRY_DATE")
+    @Column(name = "EXPIRY_DATE", nullable = false)
     protected Date expiryDate;
 
     @NotNull

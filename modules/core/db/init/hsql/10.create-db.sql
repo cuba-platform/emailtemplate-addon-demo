@@ -29,7 +29,7 @@ create table YETDEMO_SUBSCRIPTION (
     --
     NAME varchar(255),
     ACTIVE boolean not null,
-    EXPIRY_DATE date,
+    EXPIRY_DATE date not null,
     CUSTOMER_ID varchar(36) not null,
     --
     primary key (ID)
