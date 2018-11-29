@@ -42,6 +42,7 @@ public class SubscriptionListener implements BeforeInsertEntityListener<Subscrip
                 try {
                     emailTemplatesAPI.buildFromTemplate(CREATED_TEMPLATE_CODE)
                             .setTo(entity.getCustomer().getEmail())
+                            .setBodyParameter("subscription", entity)
                             .sendEmail();
                 } catch (TemplateNotFoundException | EmailException | ReportParameterTypeChangedException e) {
                     LOG.warn(e.getMessage());
@@ -55,15 +56,18 @@ public class SubscriptionListener implements BeforeInsertEntityListener<Subscrip
         try {
             emailTemplatesAPI.buildFromTemplate(UPDATED_TEMPLATE_CODE)
                     .setTo(entity.getCustomer().getEmail())
+                    .setBodyParameter("subscription", entity)
                     .sendEmail();
             if (persistenceTools.isDirty(entity, "active")) {
                 if (Boolean.TRUE.equals(entity.getActive())) {
                     emailTemplatesAPI.buildFromTemplate(RENEWED_TEMPLATE_CODE)
                             .setTo(entity.getCustomer().getEmail())
+                            .setBodyParameter("subscription", entity)
                             .sendEmail();
                 } else {
                     emailTemplatesAPI.buildFromTemplate(ENDED_TEMPLATE_CODE)
                             .setTo(entity.getCustomer().getEmail())
+                            .setBodyParameter("subscription", entity)
                             .sendEmail();
                 }
             }
