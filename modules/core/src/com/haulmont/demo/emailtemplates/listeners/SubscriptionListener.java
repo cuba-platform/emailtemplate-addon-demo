@@ -24,7 +24,7 @@ public class SubscriptionListener implements BeforeInsertEntityListener<Subscrip
 
     public static final String CREATED_TEMPLATE_CODE = "subscription_created";
     public static final String UPDATED_TEMPLATE_CODE = "subscription_updated";
-    public static final String ENDED_TEMPLATE_CODE = "subscription_ended";
+    public static final String ENDED_TEMPLATE_CODE = "subscription_expired";
     public static final String RENEWED_TEMPLATE_CODE = "subscription_renewed";
 
     private static final Logger LOG = LoggerFactory.getLogger(SubscriptionListener.class);
