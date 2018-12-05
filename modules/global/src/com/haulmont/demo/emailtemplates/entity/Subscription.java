@@ -8,9 +8,10 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.text.MessageFormat;
 import java.util.Date;
 
-@NamePattern("%s %s %s|name,active,expiryDate")
+@NamePattern("#getCaption|name,expiryDate")
 @Table(name = "YETDEMO_SUBSCRIPTION")
 @Entity(name = "yetdemo$Subscription")
 @Listeners("yetdemo_SubscriptionListener")
@@ -69,5 +70,10 @@ public class Subscription extends StandardEntity {
         return expiryDate;
     }
 
+    public String getCaption() {
+        String pattern = "{0} {1, date}";
 
+        MessageFormat fmt = new MessageFormat(pattern);
+        return fmt.format(new Object[] {name, expiryDate});
+    }
 }
