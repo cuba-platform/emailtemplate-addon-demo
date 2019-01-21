@@ -1,7 +1,7 @@
 [![license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 #Overview
-This is demo project for CUBA email template component.
+This is demo project for [CUBA email template](https://github.com/cuba-platform/emailtemplate-addon) component.
 
 Demo project will implement simple subscriptions management system.
 
