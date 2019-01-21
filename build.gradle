@@ -2,7 +2,6 @@
 buildscript {
     ext.cubaVersion = '6.10.3'
     repositories {
-        
         mavenLocal()
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
@@ -51,7 +50,7 @@ cuba {
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
     appComponent("com.haulmont.reports:reports-global:$cubaVersion")
-    appComponent("com.haulmont.addon.emailtemplates:yet-global:0.2-SNAPSHOT")
+    appComponent("com.haulmont.addon.emailtemplates:yet-global:1.0.0")
 
 }
 
