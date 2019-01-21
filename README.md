@@ -1,16 +1,16 @@
 [![license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
-#Overview
+# Overview
 This is demo project for CUBA email template component.
 
 Demo project will implement simple subscriptions management system.
 
-#Data model
+# Data model
 **Customer** - contains name, surname, email and list of subscriptions
 
 **Subscription** - contains active flag, expiry date, link to customer and subscription name.
 
-#Implementation
+# Implementation
 Demo project implements customers and subscriptions browsers and editors.
 
 Following email templates were created:
