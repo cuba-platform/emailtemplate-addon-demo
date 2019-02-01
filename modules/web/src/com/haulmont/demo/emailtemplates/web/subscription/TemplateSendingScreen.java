@@ -1,22 +1,18 @@
 package com.haulmont.demo.emailtemplates.web.subscription;
 
 import com.haulmont.addon.emailtemplates.entity.EmailTemplate;
-import com.haulmont.addon.emailtemplates.entity.ParameterValue;
-import com.haulmont.addon.emailtemplates.service.TemplateParametersExtractorService;
 import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.Metadata;
-import com.haulmont.cuba.gui.WindowManager;
+import com.haulmont.cuba.gui.Screens;
 import com.haulmont.cuba.gui.WindowParam;
 import com.haulmont.cuba.gui.components.AbstractWindow;
 import com.haulmont.cuba.gui.components.Component;
 import com.haulmont.cuba.gui.components.LookupField;
 import com.haulmont.cuba.gui.components.Window;
+import com.haulmont.cuba.gui.screen.MapScreenOptions;
+import com.haulmont.cuba.gui.screen.OpenMode;
+import com.haulmont.cuba.gui.screen.StandardCloseAction;
 import com.haulmont.demo.emailtemplates.entity.Subscription;
-import com.haulmont.reports.app.service.ReportService;
-import com.haulmont.reports.entity.ParameterType;
-import com.haulmont.reports.entity.Report;
-import com.haulmont.reports.entity.ReportInputParameter;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -27,9 +23,13 @@ public class TemplateSendingScreen extends AbstractWindow {
     private Subscription subscription;
 
     @Inject
-    private LookupField templatesField;
+    private LookupField<EmailTemplate> templatesField;
+
     @Inject
     private DataManager dataManager;
+
+    @Inject
+    private Screens screens;
 
     protected EmailTemplate template;
 
@@ -38,7 +38,7 @@ public class TemplateSendingScreen extends AbstractWindow {
         super.init(params);
 
         templatesField.addValueChangeListener(t -> {
-            template = (EmailTemplate) t.getValue();
+            template = t.getValue();
         });
     }
 
@@ -48,15 +48,16 @@ public class TemplateSendingScreen extends AbstractWindow {
             if (subscription != null) {
                 template.setTo(subscription.getCustomer().getEmail());
             }
-            openWindow("emailtemplates$EmailTemplate.send", WindowManager.OpenType.DIALOG,
+            screens.create("emailtemplates$EmailTemplate.send", OpenMode.DIALOG, new MapScreenOptions(
                     ParamsMap.of("emailTemplate", template,
                             "subscription", subscription,
                             "firstName", subscription.getCustomer().getName(),
-                            "lastName", subscription.getCustomer().getSurname()));
+                            "lastName", subscription.getCustomer().getSurname())
+            )).show();
         }
     }
 
     public void onCancelClick() {
-        close(Window.CLOSE_ACTION_ID);
+        close(WINDOW_CLOSE_ACTION);
     }
 }

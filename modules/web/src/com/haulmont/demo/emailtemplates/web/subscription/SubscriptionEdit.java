@@ -13,7 +13,7 @@ import java.util.List;
 public class SubscriptionEdit extends AbstractEditor<Subscription> {
 
     @Named("fieldGroup.customer")
-    private PickerField customerField;
+    private PickerField<Customer> customerField;
 
     protected List<Customer> entitiesToUpdate = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class SubscriptionEdit extends AbstractEditor<Subscription> {
         customerField.addValueChangeListener(v -> {
             if (v.getValue() != null) {
                 entitiesToUpdate.clear();
-                Customer customer = (Customer) v.getValue();
+                Customer customer = v.getValue();
                 customer = getDsContext().getDataSupplier().reload(customer, "customer-view");
                 Customer currentCustomer = getItem().getCustomer();
                 currentCustomer = getDsContext().getDataSupplier().reload(currentCustomer, "customer-view");
